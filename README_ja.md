@@ -1,33 +1,50 @@
-�������(Stack-chan) SC�T�[�{���f���p �V���A���p�X�X���[�v���O����
+ｽﾀｯｸﾁｬﾝ SCサーボモデル用 シリアルパススループログラム
 
-�T�v
-�E������� SC�T�[�{���f���Ɏg����T�[�{(FEETECH SCS0009)�̐ݒ�ɂ͒ʏ�C���^�[�t�F�[�X�{�[�hFE-URT-1�𗘗p���܂���
-�@������݂̊�ɂ�SC�T�[�{�ƒʐM�ł���M���ϊ��@�\������׽������(M5Stack)��USB�V���A�����炻����փp�X�X���[���邱�Ƃɂ��
-�@FE-URT-1���Ȃ��Ă��T�[�{�̐ݒ蓙���s����l�ɂ������̂ł�
+概要
+・ｽﾀｯｸﾁｬﾝ SCサーボモデルに使われるサーボ(FEETECH SCS0009)の
+  設定には通常インターフェースボードFE-URT-1を利用しますが
+　ｽﾀｯｸﾁｬﾝの基板にはSCサーボと通信できる信号変換機能がある為
+  ｽﾀｯｸﾁｬﾝ(M5Stack)のUSBシリアルからそちらへパススルーするこ
+　とによりFE-URT-1がなくてもサーボの設定等が行える様にした
+  ものです
 
-�E�K�v�Ȃ���
-  �E������� SC�T�[�{(FEITECH SCS0009)�̃��f��(�������͊��) https://github.com/meganetaaan/stack-chan
-  �EArduino IDE �� �������(M5Stack) �ɏ������߂���@https://www.arduino.cc/en/software
-  �EFT-SCServoDebug�c�[��(�p���) (�I�t�B�V�������ǂ������킩��Ȃ��E�E�E�H����FE-URT-1�̃y�[�W����DL���܂���)
+・必要なもの
+  ・ｽﾀｯｸﾁｬﾝ SCサーボ(FEITECH SCS0009)のモデル(もしくは基板)
+     https://github.com/meganetaaan/stack-chan
+  ・Arduino IDE で ｽﾀｯｸﾁｬﾝ(M5Stack) に書き込める環境
+     https://www.arduino.cc/en/software
+  ・FT-SCServoDebugツール(英語版)
+    (秋月のFE-URT-1のページからDLしました、1次配布先は不明)
 
-�E���p���@
-�@�EArduino IDE �� SerialPassthrough.ino ���J�� ������� SC�T�[�{���f��(M5Stack) �ɏ�������
-�@�EFT-SCServoDebug�c�[���𗧂��グ��
-�@�@�ECom Settings �� �������(M5Stack)�̌q�����Ă���Com�|�[�g��I��
-  �@�EBaudR��115200�ɂ��āuOpen�v�{�^��������
-  �@�EServoList�́uSearch�v�{�^���������ƽ�����݂ɓ������ꂽSC�T�[�{��2������̂ŁuStop�v�{�^���������ăT�[�`���~���܂�
-  �@���Ƃ�FE-URT-1�𗘗p����ꍇ�Ƒ���͓����ł�
-  �@���T�[�{�����o����Ȃ��ꍇ�͈�x�������(M5Stack)�̓d���X�C�b�`�������ă��Z�b�g���Ă݂Ă�������
-  �@���w�������܂�(ID:1)�̃T�[�{��2�ڑ�����Ă���ꍇ�͌��o�ł��܂���̂�ID:1�̂܂܂ŗǂ��p��(���E����)��
-   �@ �T�[�{�̃R�l�N�^���ꎞ�I�Ɏ��O���ă`���g(�㉺)�̃T�[�{��ID��2�ɕύX���Ă�������
+・利用方法
+　・Arduino IDE で SerialPassthrough.ino を開き
+    ｽﾀｯｸﾁｬﾝ SCサーボモデル(M5Stack) に書き込む
+　・FT-SCServoDebugツールを立ち上げて
+　　・Com Settings で ｽﾀｯｸﾁｬﾝ(M5Stack)の繋がっている
+      Comポートを選択
+  　・BaudRは115200にして「Open」ボタンを押す
+  　・ServoListの「Search」ボタンを押すとｽﾀｯｸﾁｬﾝに内蔵された
+      SCサーボが2つ見つかるので「Stop」ボタンを押してサーチを
+      停止します
+  　あとはFE-URT-1を利用する場合と操作は同じです
+  　※サーボが検出されない場合は一度ｽﾀｯｸﾁｬﾝ(M5Stack)の電源
+      スイッチを押してリセットしてみてください
+  　※購入したまま(ID:1)のサーボが2つ接続されている場合は検出
+      できませんのでID:1のままで良いパン(左右＝足)のサーボの
+      コネクタを一時的に取り外してチルト(上下)のサーボのIDを
+      2に変更してください
 
-���_
-�E�C���^�[�t�F�[�X�{�[�hFE-URT-1���s�v
-�E�T�[�{�̃R�l�N�^���O���Ȃ��Ă��T�[�{�̉ғ��͈͓��̐ݒ��ύX���邱�Ƃ��ł���
+利点
+・インターフェースボードFE-URT-1が不要
+・サーボのコネクタを外さなくてもサーボの稼働範囲等の設定を
+  変更することができる
 
-��_�A����������
-�E�g�p������ͽ�����݂�firmware�����Ȃ����K�v������
-�EUSB�V���A����115200bps��SC�T�[�{�Ƃ̒ʐM��1000000bps�Ƒ傫�ȑ��x�������邽�߃^�C���A�E�g���������܂�
-�@�X���C�_�[�ɂ��A���ύX���̓X���[�Y�ɓ����܂���
-  (USB�V���A���̑��x�������Əグ��Ή��P����Ǝv���邪PC�̃h���C�o�ݒ�̕ύX�����K�v�ɂȂ邽�ߖ����{)
+難点、制限事項等
+・使用した後はｽﾀｯｸﾁｬﾝ(M5Stack)のfirmwareを入れなおす必要が
+  ある
+・USBシリアルが115200bpsでSCサーボとの通信が1000000bpsと
+  大きな速度差があるためタイムアウトが発生します
+　その為スライダーによる連続変更等はスムーズに動きません
+  (USBシリアルの速度をもっと上げれば改善すると思われるが
+   PCのドライバ設定の変更等が必要になるため未実施)
 
