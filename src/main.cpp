@@ -12,12 +12,13 @@ uint8_t usb_baud = 8;
 uint8_t port_baud = 8;
 
 // uart_gpio[0:USB 1:PortA 2:PortB 3:PortC][0:RX 1:TX]
+const String port_name[5]={" A "," B "," C ","A-R","C-R"};
 #if defined(ARDUINO_M5Stack_Core_ESP32) || defined(ARDUINO_M5STACK_FIRE)
-const uint8_t uart_gpio[3][2]={{21,22},{36,26},{16,17}}; 
+const uint8_t uart_gpio[5][2]={{21,22},{36,26},{16,17},{22,21},{17,16}}; 
 #elif ARDUINO_M5STACK_Core2
-const uint8_t uart_gpio[3][2]={{33,32},{36,26},{13,14}};
+const uint8_t uart_gpio[5][2]={{33,32},{36,26},{13,14},{32,33},{14,13}};
 #elif ARDUINO_M5STACK_CORES3
-const uint8_t uart_gpio[4][2]={{1,2},{8,9},{18,17}};
+const uint8_t uart_gpio[5][2]={{1,2},{8,9},{18,17},{2,1},{17,18}};
 #endif
 uint8_t port = 0;   // 0:PortA 1:PortB 2:PortC 
 bool ec = true;     // Echo Cancel
@@ -122,10 +123,16 @@ void loop() {
     case 2:
       M5.Display.setTextColor(TFT_BLACK,TFT_CYAN);
     break;
+    case 3:
+      M5.Display.setTextColor(TFT_BLACK,TFT_RED);
+    break;
+    case 4:
+      M5.Display.setTextColor(TFT_BLACK,TFT_CYAN);
+    break;
     default:
       M5.Display.setTextColor(TFT_GREEN,TFT_BLACK);
   }
-  M5.Display.printf(" %c ",0x41 + port, baud[port_baud]);
+  M5.Display.printf("%s",port_name[port], baud[port_baud]);
 
   // button action
   if (M5.BtnA.wasHold()){
